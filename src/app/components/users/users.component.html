@@ -1,33 +1,39 @@
 <h1> PRUEBA TECNICA </h1>
-<p>{{stringForTest}}</p>
-<p>users works!</p>
+<div class="row justify-content-md-center text-center row-cols-auto">
+    <div class="col">
+        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">Colorear filas</button>
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-dark" (click)="this.sortByCountry()">Ordenar por país</button>
+    </div>
+</div>
 
-<table class="table">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="col-10 mx-auto p-3">
+    <table [ngClass]="this.tableClass">
+        <!-- <table class="{{this.tableClass}}"> ESTO TAMBIEN FUNCIONA-->
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Foto</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of this.users">
+                <td> {{users.indexOf(user) + 1}} </td>
+                <td>
+                    <img [src]="user.picture.thumbnail" alt="Foto">
+                </td>
+                <td>{{user.name.first}}</td>
+                <td>{{user.name.last}}</td>
+                <td>{{user.location.country}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark">delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
