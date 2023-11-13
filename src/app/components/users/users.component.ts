@@ -8,9 +8,11 @@ import { User } from 'src/app/services/users-results';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
+  private usersReaded: User[] = [];
+  private usersSorted: User[] = [];
+  private usersDeleted: User[] = [];
   private users: User[] = [];
-  private usersRegist: User[] = [];
-  protected isSorted = true;
+  protected isSorted = false;
   protected tableClass: string = 'table table-hover';
   protected sortButtonText: string = 'ordenar por pais';
 
@@ -22,7 +24,8 @@ export class UsersComponent {
     this.randomUserService.getUsers().subscribe(data => {
       console.log(data.results);
       this.users = data.results;
-      this.usersRegist = [...this.users]
+      this.usersReaded = [...this.users];
+      this.usersSorted = [...this.users];
     });
 
   }
@@ -35,38 +38,74 @@ export class UsersComponent {
     }
   }
 
-  private getUsers(): User[] {
-    if (this.isSorted == false) {
-      return [...this.users].sort((a, b) => {
-        return a.location.country.localeCompare(b.location.country);
-      });
-    } else {
-      return [...this.users];
-    }
+  private getSortedUsersBy(): User[] {
+    console.log('ordenando por pais')
+    this.usersSorted = [...this.usersReaded].sort((a, b) => {
+      return a.location.country.localeCompare(b.location.country);
+    });
+    return this.usersSorted;
   }
 
   protected getUsersTable(): User[] {
-    return this.getUsers();
+    return this.users;
   }
 
   protected deleteUser(user: User) {
-    // delete this.users[index];
-    // this.users.slice(index, index);
-    // this.users.splice(index, 1);
+    // this.users.splice(index, 1);// borra desde el index hasta el index + el segundo parametro
+    console.log(user.name.first + " " + user.name.last);
     this.users.splice(this.users.indexOf(user), 1);
-    console.log(user.name.first +" "+ user.name.last);
+    this.usersSorted.splice(this.usersSorted.indexOf(user), 1);
+    console.log(this.users);
+    console.log(this.usersSorted);
   }
+  // protected deleteUser(user: User) {
+  //   this.usersDeleted.push(user);
+  // }
 
   protected setSortByCountry() {
+    if (!this.isSorted) {
+      this.sortButtonText = 'no ordenar por pais'
+      this.users = this.getUsers();
+    } else {
+      this.sortButtonText = 'ordenar por pais'
+      this.users = this.getUsers();
+    }
     this.isSorted = !this.isSorted;
-    if(!this.isSorted){
-      this.sortButtonText ='no ordenar por pais'
-    }else{
-      this.sortButtonText ='ordenar por pais'
+    console.log(this.users);
+    console.log(this.usersSorted);
+  }
+
+  protected resetUsersList() {
+    this.isSorted = false;
+    this.users = [...this.usersReaded];
+   // this.usersSorted = [...this.usersReaded];
+  }
+
+  protected filterByCountry(event: KeyboardEvent) {
+    let filterInput: string = (event.target as HTMLInputElement).value.toLowerCase();
+    this.users = this.getUsers().filter(user => user.location.country.toLowerCase().includes(filterInput));
+  }
+
+  private getUsers(): User[] {
+    if (!this.isSorted) {
+      return [...this.getSortedUsersBy()];
+    } else {
+      return [...this.usersReaded];
     }
   }
 
-  protected resetUsersList(){
-    this.users = [...this.usersRegist];
+  private substractDeleted(): User[]{
+    let users: User[] = [];
+    return users;
   }
+
+  // protected filterByCountryStartWhith(event: KeyboardEvent) {
+  //   let filterInput: string = (event.target as HTMLInputElement).value.toLowerCase();
+  //   this.users = [...this.usersReaded].filter(user => user.location.country.toLowerCase().startsWith(filterInput));
+  // }
+
+  // filterByCountry (event: any) {
+  //   console.log(event.target.value)
+  // }
+
 }
