@@ -1,10 +1,20 @@
 <h1> PRUEBA TECNICA </h1>
-<div class="row justify-content-md-center text-center row-cols-auto">
+<div class="row justify-content-md-center row-cols-auto align-items-center">
     <div class="col">
         <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">Colorear filas</button>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-dark" (click)="this.sortByCountry()">Ordenar por país</button>
+        <button type="button" class="btn btn-dark" (click)="this.setSortByCountry()">{{this.sortButtonText}}</button>
+    </div>
+
+    <div class="col">
+        <button type="button" class="btn btn-dark" (click)="this.resetUsersList()">reset list</button>
+    </div>
+    <div class="col">
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="buscar por pais">
+            <label for="floatingInput">Filtra por pais</label>
+        </div>
     </div>
 </div>
 
@@ -22,8 +32,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of this.users">
-                <td> {{users.indexOf(user) + 1}} </td>
+            <tr *ngFor="let user of this.getUsersTable()">
+                <td> {{this.getUsersTable().indexOf(user) + 1}} </td>
                 <td>
                     <img [src]="user.picture.thumbnail" alt="Foto">
                 </td>
@@ -31,7 +41,7 @@
                 <td>{{user.name.last}}</td>
                 <td>{{user.location.country}}</td>
                 <td>
-                    <button type="button" class="btn btn-dark">delete</button>
+                    <button type="button" class="btn btn-dark" (click)="this.deleteUser(user)">delete</button>
                 </td>
             </tr>
         </tbody>
