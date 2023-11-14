@@ -1,7 +1,8 @@
 <h1 class="text-center"> PRUEBA TECNICA </h1>
 <div class="row justify-content-md-center row-cols-auto align-items-center">
     <div class="col">
-        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">{{this.isTableStriped? 'No solorear filas':'colorear filas'}}</button>
+        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">{{this.isTableStriped? 'No solorear
+            filas':'colorear filas'}}</button>
     </div>
     <div class="col">
         <button type="button" class="btn btn-dark" (click)="this.sortUsersBy(1)">{{isSortedByCountry == false ?
@@ -15,7 +16,7 @@
         <div class="form-floating">
             <!-- <input class="form-control" id="floatingInput" placeholder="buscar por pais" #filterInput (keyup)="(0)"> -->
             <!-- <p class="text-center">{{filterInput.value}} </p> -->
-            <input class="form-control" id="floatingInput" placeholder="buscar por pais"
+            <input class="form-control" id="floatingInput" placeholder="buscar por pais" 
                 (keyup)="this.filterByCountry($event)">
             <label for="floatingInput">Filtra por pais</label>
         </div>

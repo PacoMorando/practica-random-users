@@ -15,6 +15,7 @@ export class UsersComponent {
   protected isSorted = false;
   protected isSortedByCountry = false;
   protected isTableStriped = false;
+  private filterInput: string = '';
 
   constructor(private randomUserService: RandomUsersService) {
     // EJEMPLO DE COMO ESPERAR AL SERVICE PARA LEER TODO EL JSON
@@ -49,6 +50,7 @@ export class UsersComponent {
     if (arg == 1) {
       if (!this.isSortedByCountry) {
         this.sortUsersByCountry();
+        this.isSorted = true;
       } else { this.unsortUsers() }
     }
     if (arg == 2) {
@@ -66,14 +68,16 @@ export class UsersComponent {
     this.usersSorted.sort((a, b) => {
       return a.location.country.localeCompare(b.location.country);
     });
-    this.usersTable = [...this.usersSorted];
+    // this.usersTable = [...this.usersSorted].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
+    this.usersTable = this.getUserTableFiltered([...this.usersSorted]);
   }
 
   private sortUsersByFirstName() {
     this.usersSorted.sort((a, b) => {
       return a.name.first.localeCompare(b.name.first);
     });
-    this.usersTable = [...this.usersSorted];
+    // this.usersTable = [...this.usersSorted].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
+    this.usersTable = this.getUserTableFiltered([...this.usersSorted]);
     this.isSortedByCountry = false;
   }
 
@@ -81,26 +85,28 @@ export class UsersComponent {
     this.usersSorted.sort((a, b) => {
       return a.name.last.localeCompare(b.name.last);
     });
-    this.usersTable = [...this.usersSorted];
+    // this.usersTable = [...this.usersSorted].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
+    this.usersTable = this.getUserTableFiltered([...this.usersSorted]);
     this.isSortedByCountry = false;
   }
 
   private unsortUsers() {
     this.isSorted = false;
     this.isSortedByCountry = false;
-    this.usersTable = [...this.users];
+    this.usersTable = [...this.users].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
   }
 
   protected resetUsersList() {
     this.isSorted = false;
     this.users = [...this.usersReaded];
+    this.usersSorted = [...this.usersReaded];
     this.usersTable = [...this.users];
   }
 
   protected filterByCountry(event: KeyboardEvent) {
-    let filterInput: string = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filterInput = (event.target as HTMLInputElement).value.toLowerCase();
     // this.usersTable = this.getUsers().filter(user => user.location.country.toLowerCase().includes(filterInput));
-    this.usersTable = this.getUsers().filter(user => user.location.country.toLowerCase().includes(filterInput));
+    this.usersTable = this.getUsers().filter(user => user.location.country.toLowerCase().includes(this.filterInput));
   }
 
   private getUsers(): User[] {
@@ -109,6 +115,10 @@ export class UsersComponent {
     } else {
       return [...this.users];
     }
+  }
+
+  private getUserTableFiltered(users: User[]): User[]{
+    return users.filter(user => user.location.country.toLowerCase().includes(this.filterInput));
   }
 
   // protected filterByCountryStartWhith(event: KeyboardEvent) {
