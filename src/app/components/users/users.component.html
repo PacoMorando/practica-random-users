@@ -1,10 +1,11 @@
 <h1 class="text-center"> PRUEBA TECNICA </h1>
 <div class="row justify-content-md-center row-cols-auto align-items-center">
     <div class="col">
-        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">Colorear filas</button>
+        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">{{this.isTableStriped? 'No solorear filas':'colorear filas'}}</button>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-dark" (click)="this.setSortByCountry()">{{this.sortButtonText}}</button>
+        <button type="button" class="btn btn-dark" (click)="this.sortUsersBy(1)">{{isSortedByCountry == false ?
+            'ordenar por pais':'no ordenar por pais'}}</button>
     </div>
 
     <div class="col">
@@ -14,7 +15,8 @@
         <div class="form-floating">
             <!-- <input class="form-control" id="floatingInput" placeholder="buscar por pais" #filterInput (keyup)="(0)"> -->
             <!-- <p class="text-center">{{filterInput.value}} </p> -->
-            <input class="form-control" id="floatingInput" placeholder="buscar por pais" (keyup)="this.filterByCountry($event)">
+            <input class="form-control" id="floatingInput" placeholder="buscar por pais"
+                (keyup)="this.filterByCountry($event)">
             <label for="floatingInput">Filtra por pais</label>
         </div>
     </div>
@@ -22,19 +24,19 @@
 
 
 <div class="col-10 mx-auto p-3">
-    <table [ngClass]="this.tableClass">
+    <table [ngClass]="this.isTableStriped? 'table table-hover table-striped':'table table-hover'">
         <!-- <table class="{{this.tableClass}}"> ESTO TAMBIEN FUNCIONA-->
         <thead class="table-dark">
             <tr>
                 <th scope="col">Foto</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
+                <th style="cursor: pointer;" scope="col" (click)="this.sortUsersBy(2)">Nombre</th>
+                <th style="cursor: pointer;" scope="col" (click)="this.sortUsersBy(3)">Apellido</th>
                 <th scope="col">Pais</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of this.getUsersTable()">
+            <tr *ngFor="let user of this.usersTable">
                 <td>
                     <img [src]="user.picture.thumbnail" alt="Foto">
                 </td>

@@ -7,7 +7,7 @@ import { UsersResponse } from './users-results';
   providedIn: 'root'
 })
 export class RandomUsersService {
-  private apiURL = 'https://randomuser.me/api/?results=20'
+  private apiURL = 'https://randomuser.me/api/?results=100'
 
   constructor(private httpClient: HttpClient) {
   }
