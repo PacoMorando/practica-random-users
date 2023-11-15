@@ -1,5 +1,5 @@
 # Random Users Technical Assessments
-This is a practice of technical assessments that i found in internet.
+This is a practice of a technical assessments that I found on the internet.
 
 Here is the app up an running https://pacomorando.github.io/practica-random-users/
 
