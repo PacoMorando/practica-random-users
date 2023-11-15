@@ -1,7 +1,9 @@
 # Random Users Technical Assessments
-This is a practice of technical assessments that i found in internet
+This is a practice of technical assessments that i found in internet.
 
-Here are the requirementes:
+Here is the app up an running https://pacomorando.github.io/practica-random-users/
+
+The requirementes:
 
 - [ ] Fetch 100 rows of data using the API https://randomuser.me/.
 - [ ] Display the data in a table format.
