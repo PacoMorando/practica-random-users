@@ -1,12 +1,13 @@
-<h1 class="text-center"> PRUEBA TECNICA </h1>
+<h2 class="text-center p-3"> Radom user technical test </h2>
 <div class="row justify-content-md-center row-cols-auto align-items-center">
     <div class="col">
-        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">{{this.isTableStriped? 'No solorear
-            filas':'colorear filas'}}</button>
+        <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">
+            {{isTableStriped == false ? 'color rows':'no color rows'}}
+        </button>
     </div>
     <div class="col">
         <button type="button" class="btn btn-dark" (click)="this.sortUsersBy(1)">{{isSortedByCountry == false ?
-            'ordenar por pais':'no ordenar por pais'}}</button>
+            'sort by por pais':'unsort por pais'}}</button>
     </div>
 
     <div class="col">
@@ -16,9 +17,9 @@
         <div class="form-floating">
             <!-- <input class="form-control" id="floatingInput" placeholder="buscar por pais" #filterInput (keyup)="(0)"> -->
             <!-- <p class="text-center">{{filterInput.value}} </p> -->
-            <input class="form-control" id="floatingInput" placeholder="buscar por pais" 
+            <input class="form-control" id="floatingInput" placeholder="filter by country"
                 (keyup)="this.filterByCountry($event)">
-            <label for="floatingInput">Filtra por pais</label>
+            <label for="floatingInput">filter by country</label>
         </div>
     </div>
 </div>

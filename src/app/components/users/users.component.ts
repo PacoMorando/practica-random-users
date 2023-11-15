@@ -68,7 +68,6 @@ export class UsersComponent {
     this.usersSorted.sort((a, b) => {
       return a.location.country.localeCompare(b.location.country);
     });
-    // this.usersTable = [...this.usersSorted].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
     this.usersTable = this.getUserTableFiltered([...this.usersSorted]);
   }
 
@@ -76,7 +75,6 @@ export class UsersComponent {
     this.usersSorted.sort((a, b) => {
       return a.name.first.localeCompare(b.name.first);
     });
-    // this.usersTable = [...this.usersSorted].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
     this.usersTable = this.getUserTableFiltered([...this.usersSorted]);
     this.isSortedByCountry = false;
   }
@@ -85,7 +83,6 @@ export class UsersComponent {
     this.usersSorted.sort((a, b) => {
       return a.name.last.localeCompare(b.name.last);
     });
-    // this.usersTable = [...this.usersSorted].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
     this.usersTable = this.getUserTableFiltered([...this.usersSorted]);
     this.isSortedByCountry = false;
   }
@@ -93,7 +90,7 @@ export class UsersComponent {
   private unsortUsers() {
     this.isSorted = false;
     this.isSortedByCountry = false;
-    this.usersTable = [...this.users].filter(user => user.location.country.toLowerCase().includes(this.filterInput));
+    this.usersTable = this.getUserTableFiltered([...this.users]);
   }
 
   protected resetUsersList() {
@@ -105,8 +102,7 @@ export class UsersComponent {
 
   protected filterByCountry(event: KeyboardEvent) {
     this.filterInput = (event.target as HTMLInputElement).value.toLowerCase();
-    // this.usersTable = this.getUsers().filter(user => user.location.country.toLowerCase().includes(filterInput));
-    this.usersTable = this.getUsers().filter(user => user.location.country.toLowerCase().includes(this.filterInput));
+    this.usersTable = this.getUserTableFiltered([...this.getUsers()]);
   }
 
   private getUsers(): User[] {
