@@ -1,6 +1,6 @@
 <h2 class="text-center p-3"> RANDOM USERS TECHNICAL ASSESSMENTS </h2>
-<div class="row justify-content-md-center row-cols-auto align-items-center">
-    <div class="col">
+<div class="row justify-content-center row-cols-auto align-items-center p-2 ">
+    <div class="col p-0">
         <button type="button" class="btn btn-dark" (click)="this.switchTableClass()">
             {{isTableStriped == false ? 'color rows':'no color rows'}}
         </button>
@@ -10,10 +10,10 @@
             'sort by por pais':'unsort por pais'}}</button>
     </div>
 
-    <div class="col">
+    <div class="col  p-0">
         <button type="button" class="btn btn-dark" (click)="this.resetUsersList()">reset list</button>
     </div>
-    <div class="col">
+    <div class="col py-2">
         <div class="form-floating">
             <!-- <input class="form-control" id="floatingInput" placeholder="buscar por pais" #filterInput (keyup)="(0)"> -->
             <!-- <p class="text-center">{{filterInput.value}} </p> -->
@@ -24,31 +24,32 @@
     </div>
 </div>
 
-
-<div class="col-10 mx-auto p-3">
-    <table [ngClass]="this.isTableStriped? 'table table-hover table-striped':'table table-hover'">
-        <!-- <table class="{{this.tableClass}}"> ESTO TAMBIEN FUNCIONA-->
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Foto</th>
-                <th style="cursor: pointer;" scope="col" (click)="this.sortUsersBy(2)">Nombre</th>
-                <th style="cursor: pointer;" scope="col" (click)="this.sortUsersBy(3)">Apellido</th>
-                <th scope="col">Pais</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of this.usersTable">
-                <td>
-                    <img [src]="user.picture.thumbnail" alt="Foto">
-                </td>
-                <td>{{user.name.first}}</td>
-                <td>{{user.name.last}}</td>
-                <td>{{user.location.country}}</td>
-                <td>
-                    <button type="button" class="btn btn-dark" (click)="this.deleteUser(user)">delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <table [ngClass]="this.isTableStriped? 'table table-hover table-striped':'table table-hover'">
+            <!-- <table class="{{this.tableClass}}"> ESTO TAMBIEN FUNCIONA-->
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Foto</th>
+                    <th style="cursor: pointer;" scope="col" (click)="this.sortUsersBy(2)">Nombre</th>
+                    <th style="cursor: pointer;" scope="col" (click)="this.sortUsersBy(3)">Apellido</th>
+                    <th scope="col">Pais</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of this.usersTable">
+                    <td>
+                        <img [src]="user.picture.thumbnail" alt="Foto">
+                    </td>
+                    <td>{{user.name.first}}</td>
+                    <td>{{user.name.last}}</td>
+                    <td>{{user.location.country}}</td>
+                    <td>
+                        <button type="button" class="btn btn-dark" (click)="this.deleteUser(user)">delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
